@@ -2,5 +2,5 @@
 ## Comisión A
 ### Silicon Misiones - https://siliconmisiones.gob.ar/
 #### Autor: Alejandro Casco
-##### Descripción
+##### **Descripción**
 Este repositorio fue creado con fines académicos. Contiene los ejercicios resueltos del Módulo 1.
