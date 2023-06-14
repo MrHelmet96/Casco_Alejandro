@@ -1,8 +1,8 @@
-//Realiza un script que muestre la serie de fibonacci hasta un número entre 1 y 100 pedido por teclado
+//Realiza un script que muestre la serie de fibonacci hasta un número entre 1 y 1000 pedido por teclado
 
 const limite = parseInt(prompt("Ingrese un número entre 1 y 100:"));
 
-if (isNaN(limite) || limite < 1 || limite > 100) {
+if (isNaN(limite) || limite < 1 || limite > 1000) {
   console.log("El número ingresado no es válido.");
 } else {
   let num1 = 0;
