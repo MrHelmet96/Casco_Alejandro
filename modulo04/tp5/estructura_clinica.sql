@@ -1,12 +1,3 @@
--- ATENCIÓN! leer antes de evaluar.
--- El código a continuación fue generado por Workbench a partir de "Forward Engineering",
--- después de que yo haya creado manualmente el diagrama y todas sus relaciones.
-
--- El código funciona de manera ""universal"", de modo que si se ingresa este código como un query,
--- Lo que sucederá será que:
--- 1. eliminará cualquier base de datos llamada "tp5" y luego crea una llamada la misma manera.
--- 2. eliminará cualquier tabla llamada 'medico', 'paciente' y/o 'ingreso'; para luego crear las mismas (con sus respectivos atributos/coumnas).
- 
 -- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
@@ -16,7 +7,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema tp5
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `tp5` ;
 
 -- -----------------------------------------------------
 -- Schema tp5
@@ -27,14 +17,12 @@ USE `tp5` ;
 -- -----------------------------------------------------
 -- Table `tp5`.`medico`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `tp5`.`medico` ;
-
 CREATE TABLE IF NOT EXISTS `tp5`.`medico` (
   `matricula` INT NOT NULL,
   `nombre` VARCHAR(30) NULL,
   `apellido` VARCHAR(30) NULL,
   `especialidad` VARCHAR(30) NULL,
-  `observaciones TEXT` VARCHAR(45) NULL,
+  `observaciones` TEXT NULL,
   PRIMARY KEY (`matricula`))
 ENGINE = InnoDB;
 
@@ -42,8 +30,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `tp5`.`paciente`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `tp5`.`paciente` ;
-
 CREATE TABLE IF NOT EXISTS `tp5`.`paciente` (
   `nss` BIGINT(20) NOT NULL,
   `nombre` VARCHAR(30) NOT NULL,
@@ -60,8 +46,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `tp5`.`ingreso`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `tp5`.`ingreso` ;
-
 CREATE TABLE IF NOT EXISTS `tp5`.`ingreso` (
   `id_ingreso` INT(11) NOT NULL,
   `fecha_ingreso` DATE NOT NULL,
