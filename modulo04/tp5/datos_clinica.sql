@@ -9,8 +9,8 @@ VALUES (155, 'Alfredo', 'Guiterrez', 'Medicina Familiar', 'No atiende PAMI'),
 (449,'Ricardo','Puchini','Medicina Familiar','médico clínico general'),
 (645,'Cacho','Villa','Oftalmologia',null),
 (733, 'Tatiana', 'Brandigamo', 'PediatrÍa', null),
-(774,'Alfonso','Chamorro','CardiologÍa'),
-(888, 'Pedro Pablo', 'Cichanowski','Urología');
+(774,'Alfonso','Chamorro','CardiologÍa', null),
+(888, 'Pedro Pablo', 'Cichanowski','Urología', null);
 
 -- Cargando datos en la tabla 'paciente'.
 

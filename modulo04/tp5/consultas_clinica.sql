@@ -27,3 +27,10 @@ DELETE FROM tp5.medico where matricula NOT IN (SELECT DISTINCT matricula_medico 
 -- Dichos datos debes estar ordenados de mayor a menor en cuanto a la cantidad de usos.
 
 SELECT nro_cama AS numero_cama, COUNT(*) AS usos FROM tp5.ingreso GROUP BY nro_cama ORDER BY usos DESC;
+
+-- Mostrar una lista ordenada con el apellido y nombre del paciente junto la cantidad de veces que ha realizado un ingreso, 
+-- el listado solamente debe mostrar aquellos pacientes que hayan realizado al menos 4 (cuatro) ingresos a la clínica.
+
+SELECT concat(apellido, ', ', nombre) as paciente, COUNT(*) AS cantidad_ingresos FROM tp5.paciente
+JOIN ingreso ON paciente.nro_historial_clinico = ingreso.nro_historial_paciente
+group by paciente.nro_historial_clinico HAVING COUNT(*) >= 4 order by cantidad_ingresos DESC;
