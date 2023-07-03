@@ -26,4 +26,4 @@ DELETE FROM tp5.medico where matricula NOT IN (SELECT DISTINCT matricula_medico 
 -- f) Obtener una tabla con dos columnas, donde la primera corresponda al numero de cama y la segunda, llamada "usos" que corresponda a la cantidad de veces que se ha utilizado dicha cama en los ingresos.
 -- Dichos datos debes estar ordenados de mayor a menor en cuanto a la cantidad de usos.
 
-SELECT nro_cama
+SELECT nro_cama AS numero_cama, COUNT(*) AS usos FROM tp5.ingreso GROUP BY nro_cama ORDER BY usos DESC;
