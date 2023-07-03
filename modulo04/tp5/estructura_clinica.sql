@@ -1,3 +1,7 @@
+-- ATENCION! Leer antes de evaluar!
+-- Esta base de datos y sus respectivas tablas han sido creadas a partir de 'Forward Engineering'
+-- Yo cree el DER con el Workbench, y la opción "Forward Engineering" te crea toda las sentencias. Aparentemente con todos estos agregados que no se que son jeje
+
 -- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
