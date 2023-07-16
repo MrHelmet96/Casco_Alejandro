@@ -3,35 +3,35 @@
         "nombre": "Pedro",
         "apellido": "Guzman",
         "DNI": 22773450,
-        "Telefono": 3755121314,
-        "Localidad": "Leandro N. Alem"
+        "telefono": 3755121314,
+        "localidad": "Leandro N. Alem"
     },
     {
-        "Nombre": "Maria",
+        "nombre": "Maria",
         "apellido": "Nieves",
         "DNI": 35928532,
-        "Telefono": 3764131517,
-        "Localidad": "Posadas"
+        "telefono": 3764131517,
+        "localidad": "Posadas"
     },
     {
         "nombre": "Roebrto Carlos",
         "apellido": "Guerra",
         "DNI": 40726384,
-        "Telefono": 3758171819,
-        "Localidad": "Apóstoles"
+        "telefono": 3758171819,
+        "localidad": "Apóstoles"
     },
     {
         "nombre": "Julieta",
         "apellido": "Lopez",
         "DNI": 29384710,
-        "Telefono": 3751222324,
-        "Localidad": "Eldorado"
+        "telefono": 3751222324,
+        "localidad": "Eldorado"
     },
     {
         "nombre": "Ramon",
         "apellido": "Rodriguez",
         "DNI": 31749223,
-        "Telefono": 3765334455,
-        "Localidad": "Posadas"
+        "telefono": 3765334455,
+        "localidad": "Posadas"
     }
 ]
