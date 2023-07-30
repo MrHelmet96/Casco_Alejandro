@@ -3,7 +3,7 @@ let secondCard = null;
 let canFlip = true;
 
 // Imágenes que se usarán en las cartas
-const images = ["imagen1.jpg", "imagen2.jpg", "imagen3.jpg", "imagen4.jpg", "imagen5.jpg", "imagen6.jpg" /* Agrega aquí más imágenes */];
+const images = ["imagen1.jpg", "imagen2.jpg", "imagen3.jpg", "imagen4.jpg", "imagen5.jpg", "imagen6.jpg", /* Agrega aquí más imágenes */];
 
 // Función para revolver el array de imágenes
 function shuffleImages(array) {
@@ -11,6 +11,12 @@ function shuffleImages(array) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
+
+  // Agregar evento click a cada carta después de crearlas en el DOM
+  const cards = document.querySelectorAll(".card");
+  cards.forEach((card, index) => {
+    card.addEventListener("click", () => flipCard(index));
+  });
 }
 
 // Función para voltear una carta
