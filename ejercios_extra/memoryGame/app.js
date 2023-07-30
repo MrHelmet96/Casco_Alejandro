@@ -3,7 +3,7 @@ let secondCard = null;
 let canFlip = true;
 
 // Imágenes que se usarán en las cartas
-const images = ["reverso.jpg", "imagen1.jpg", "imagen2.jpg", "imagen3.jpg", "imagen4.jpg", "imagen5.jpg", "imagen6.jpg" /* Agrega aquí más imágenes */];
+const images = ["imagen1.jpg", "imagen2.jpg", "imagen3.jpg", "imagen4.jpg", "imagen5.jpg", "imagen6.jpg" /* Agrega aquí más imágenes */];
 
 // Función para revolver el array de imágenes
 function shuffleImages(array) {
