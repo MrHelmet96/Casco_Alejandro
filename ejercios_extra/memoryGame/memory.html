@@ -1,40 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <title>Juego de Memoria</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Memoria</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Juego de Memoria</h1>
-  <div class="game-board">
-    <div class="card" onclick="flipCard(0)">
-        <img src="imagen1.jpg" alt="Carta 1" class="front" id="front0">
-        <img src="reverso.jpg" alt="Reverso" class="back">
+    <div class="container">
+        <header class="header">
+            <h1>Juego de Memoria</h1>
+        </header>
+        <div class="memory-game">
+            <div class="grid">
+                <!-- Las cartas se generarán aquí dinámicamente mediante JavaScript -->
+            </div>
+        </div>
+        <div class="win-message"></div> <!-- Aquí se mostrará el mensaje de victoria -->
+        <button class="restart-button" onclick="resetGame()">Reiniciar Juego</button>
     </div>
-    <div class="card" onclick="flipCard(1)">
-        <img src="imagen2.jpg" alt="Carta 2" class="front" id="front1">
-        <img src="reverso.jpg" alt="Reverso" class="back">
-    </div>
-    <div class="card" onclick="flipCard(2)"> 
-        <img src="imagen3.jpg" alt="Carta 3" class="front" id="front2">
-        <img src="reverso.jpg" alt="Reverso" class="back">
-    </div>
-    <div class="card" onclick="flipCard(3)">
-        <img src="imagen4.jpg" alt="Carta 4" class="front" id="front3">
-        <img src="reverso.jpg" alt="Reverso" class="back">
-    </div>
-    <div class="card" onclick="flipCard(4)">
-        <img src="imagen5.jpg" alt="Carta 5" class="front" id="front4">
-        <img src="reverso.jpg" alt="Reverso" class="back">
-     </div>
-     <div class="card" onclick="flipCard(5)">
-        <img src="imagen6.jpg" alt="Carta 6" class="front" id="front5">
-        <img src="reverso.jpg" alt="Reverso" class="back">
-    </div>
-    <!-- Agrega aquí más cartas con sus respectivos ids -->
-  </div>
-  <script src="app.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
