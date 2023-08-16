@@ -1,4 +1,16 @@
 
+html {
+    font-family: 'Sora', sans-serif;
+}
+
+body {
+    margin: 90vw;
+}
+
+header {
+    background-color: #20202c;
+}
+
 #p1 {
     border-style: solid;
     border-color: black;
