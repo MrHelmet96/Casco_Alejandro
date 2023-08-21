@@ -5,6 +5,7 @@ html {
 
 body {
     margin: 90vw;
+    display: flex;
 }
 
 header {
