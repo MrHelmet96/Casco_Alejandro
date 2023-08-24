@@ -17,10 +17,10 @@ var usuarioDb = require("model/user.js");
 
 app.getAll('/', getAll);
 app.post('/', createUser);
+app.put('/:id_usuario', updateUser);
 
 
-
-function getAll (req, res) {
+function getAll (err, res) {
     usuarioDb.getAll((err, resultado) => {
         if (err) {
             res.status(500).send(err);
@@ -40,6 +40,31 @@ function createUser(req, res) {
         }
     });
 }
+
+function updateUser(req, res) {
+    let usuario = req.body;
+    let id_usuario = req.params
+    usuarioDb.create(usuario,(err, resultado) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.send(resultado);
+        }
+    });
+}
+
+usuario_db.update = function(usuario, funcallback) {
+    const consulta = "UPDATE usuario_id SET mail = ?, contraseña = ? WHERE usurio_id = ?";
+    const params = [usuario.nickname, usuario.pass, usuario.mail];
+
+    connection.query(consulta, params, (err, resultado) => {
+        if (err) {
+            funcallback(err);
+        } else {
+            funcallback(null, resultado); // Pasar "null" como primer parámetro indica que no hay error.
+        }
+    });
+};
 
 module.exports = app;
 
