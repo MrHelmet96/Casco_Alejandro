@@ -81,5 +81,16 @@ function getByDNI(req, res) {
     });
 }
 
+function createPerson(req, res) {
+    let persona = req.body;
+    personaDb.create(persona, (err, resultado) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.send(resultado);
+        }
+    });
+}
+
 module.exports = app;
 
