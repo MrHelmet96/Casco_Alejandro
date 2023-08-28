@@ -6,12 +6,14 @@
     <title>Document</title>
 </head>
 <body>
-    <p id="demo">
-        Contenido previo
-    </p>
+    <div id="demo">
+        <a href="https://www.google.com" id="miEnlace">Enlace</a>
+    </div>
 
     <script>
-        document.getElementById("demo").innerHTML = "Hello World!";
+        setTimeout(()=>{
+            document.getElementById("demo").innerHTML = "Hello World!";
+        }, 5000);
     </script>
 </body>
 </html>
