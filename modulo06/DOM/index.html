@@ -6,14 +6,28 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="demo">
+    <div id="demo" style="border: 01rem dotted red;">
         <a href="https://www.google.com" id="miEnlace">Enlace</a>
     </div>
 
     <script>
         setTimeout(()=>{
-            document.getElementById("demo").innerHTML = "Hello World!";
-        }, 5000);
+            document.getElementById("miEnlace").href = "https://www.emugames.net";
+            document.getElementById("demo").style.border = "1px solid black";
+        }, 1000);
+
+        var colorFondo = "grey";
+        setInterval(() => {
+            if(colorFondo === "grey") {
+                document.getElementById("demo").style.backgroundColor = "#ddd";
+                document.getElementById("demo").style.color = "#red";
+                var colorFondo = "red";
+            } else {
+                document.getElementById("demo").style.backgroundColor = "#444";
+                document.getElementById("demo").style.color = "#white";
+                var colorFondo = "grey";
+            }
+        }, 500);
     </script>
 </body>
 </html>
