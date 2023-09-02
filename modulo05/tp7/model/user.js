@@ -95,6 +95,4 @@ UconsultaAbd.getByEmail = function(mail, funcallback) {
 };
 
 
-module.exports = UconsultaAbd;
-
 module.exports = usuario_db;
