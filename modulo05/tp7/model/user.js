@@ -1,40 +1,22 @@
 require('rootpath')();
-
-var usuario_db = {};
-
 const { query } = require('express');
 const mysql = require('mysql');
 const configuracion = require("config.json");
 
+var UconsultaAbd = {};
+var conexion = mysql.createConnection(configuracion.database);
 
-var connection = mysql.createConnection(configuracion.database);
-connection.connect((err) => {
+conexion.connect((err) => {
     if (err) {
         console.log(err);
     } else {
-        console.log("base de datos conectada");
+        console.log("base de datos de usuario enlazada");
     }
 });
 
-
-//-- antes -------------------------------------------------------------------
-//teniamos un solo archivo que era el index //codificaba todo en la misma funcion
-
-
-//-- ahora -------------------------------------------------------------------
-//tenemos 2 archivos que son el persona_index y la persona_BD
-//tengo que codificar en dos funciones y comunicarme entre ellas
-//persona_index (interaccion con el servidor): se encargara de mandarle los mensajes al frontend y de hacer peticiones a persona_BD  
-//persona_BD (interaccion con la base de datos): recibira peticiones de persona_index y debera devolver una respuesta
-//¿como me comunico?: una forma invocar(mandar una funcion [carretilla vacia]) ---> atender (recibir la funcion que me mandaron)
-//persona_BD are lo que tenga que hacer y enviare mis datos a la funcion que me enviaron [llenar la carretilla]
-
-
-
-
-usuario_db.getAll = function (funCallback) {
-    var consulta = 'SELECT * FROM user';
-    connection.query(consulta, function (err, rows) {
+UconsultaAbd.getAll = function (funCallback) {
+    var consulta = 'SELECT * FROM usuario';
+    conexion.query(consulta, function (err, rows) {
         if (err) {
             funCallback(err);
             return;
@@ -44,51 +26,75 @@ usuario_db.getAll = function (funCallback) {
     });
 }
 
+UconsultaAbd.createUser = function (usuario, funcallback) {
+    consulta = "INSERT INTO usuario (mail, nickname, clave, persona) VALUES (?,?,?,?);";
+    params = [usuario.mail, usuario.nickname, usuario.clave, usuario.persona];
 
-
-usuario_db.create = function (usuario, funcallback) {
-    consulta = "INSERT INTO user (email, nickname, clave) VALUES (?,?,?);";
-    params = [usuario.email, usuario.nickname, usuario.clave];
-
-    connection.query(consulta, params, (err, detail_bd) => {
+    conexion.query(consulta, params, (err, detail_bd) => {
         if (err) {
 
             if (err.code == "ER_DUP_ENTRY") {
                 funcallback({
-                    mensajito: "el usuario ya fue registrada",
-                    detalle: err
+                    mensajito: "Ya se ah registrado este usuario con el nickname: " + usuario.nickname,
                 });
             } else {
                 funcallback({
-                    mensajito: "error diferente",
+                    mensajito: "Error encontrado",
                     detalle: err
                 });
             }
         } else {
-
             funcallback(undefined, {
-                mensajito: "se creo la el usaurio " + usuario.nickname,
+                mensajito: "Se creo el usuario: " + usuario.nickname,
                 detalle: detail_bd
             });
         }
     });
 }
 
+UconsultaAbd.modificar = function(usuario, funcallback) {
+    const consulta = "UPDATE usuario SET nickname = ?, clave = ? WHERE mail = ?";
+    const params = [usuario.nickname, usuario.clave, usuario.mail];
 
-// el id de persona persona es dni
-// el id de usuario es email
-// lo que necesito es el nikname de usuario a partir de una persona
+    conexion.query(consulta, params, (err, resultado) => {
+        if (err) {
+            funcallback(err);
+        } else {
+            funcallback(null, resultado);
+        }
+    });
+};
+
+UconsultaAbd.borrar = function (id_p_e, retorno) { 
+    consulta = "DELETE FROM usuario WHERE mail = ?";
+    parametro = id_p_e;
+
+    conexion.query(consulta, parametro, (err, result) => {
+        if(err) {
+            retorno({message: err.code, detail: err}, undefined);
+        }else{ if (result.affectedRows == 0) {
+            retorno(undefined, { mensajito: "No se encontro al usuario con el mail " + id_p_e});
+        } else {
+            retorno(undefined, { mensajito: "Usuario eliminado con el mail: "+ id_p_e });
+        }
+    }
+    })
+};
+
+UconsultaAbd.getByEmail = function(mail, funcallback) {
+    const consulta = "SELECT mail FROM usuario";
+    const params = mail;
+
+    conexion.query(consulta, params, (err, resultado) => {
+        if (err) {
+            funcallback(err);
+        } else {
+            funcallback(null, resultado);
+        }
+    });
+};
 
 
-
-
-/*
-if (result_model.detail.affectedRows == 0) {
-                res.status(404).send(result_model.message);
-            } else {
-                res.send(result_model.message);
-            }
-*/
-
+module.exports = UconsultaAbd;
 
 module.exports = usuario_db;

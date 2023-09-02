@@ -4,69 +4,69 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-var usuarioDb = require("model/user.js");
+var Modelusuario = require("Modelo/usuarioM.js");
 
-//req : es lo que llega desde el frontend (en nuestro caso Postman)
-//res : respuesta enviada desde el servidor al frontend
-
-//atendiendo el endpoint /api/persona mediante el metodo GET 
-// |--> llamar a la funcion getAll() que está en el archivo encargado de hestionar lo relacionado a la tabla PERSONA en la BD
-//      y procesara la respuesta en una funcion callback
-// |--> GetAll() enviara como respuesta un error (que le enviará la base de datos) o los datos en caso de exito   
-
-
-app.getAll('/', getAll);
-app.post('/', createUser);
-app.put('/:id_usuario', updateUser);
-
-
-function getAll (err, res) {
-    usuarioDb.getAll((err, resultado) => {
+app.get('/', getAll);
+function getAll(req, res) {
+    Modelusuario.getAll((err, resultado) => {
         if (err) {
             res.status(500).send(err);
         } else {
             res.json(resultado);
         }
     });
-}
+};
 
+app.get('/mail', Cmail) 
+function Cmail(req, res) {
+    Modelusuario.Cmail((err,resultado) => {
+        if (err) {
+            res.status(500).send(err)
+        } else {
+            res.json(resultado)
+        }
+    })
+};
+
+app.post('/', createUser);
 function createUser(req, res) {
     let usuario = req.body;
-    usuarioDb.create(usuario, (err, resultado) => {
+    Modelusuario.createUser(usuario, (err, resultado) => {
         if (err) {
             res.status(500).send(err);
         } else {
             res.send(resultado);
-        }
-    });
-}
-
-function updateUser(req, res) {
-    let usuario = req.body;
-    let id_usuario = req.params
-    usuarioDb.create(usuario,(err, resultado) => {
-        if (err) {
-            res.status(500).send(err);
-        } else {
-            res.send(resultado);
-        }
-    });
-}
-
-usuario_db.update = function(usuario, funcallback) {
-    const consulta = "UPDATE usuario_id SET mail = ?, contraseña = ? WHERE usurio_id = ?";
-    const params = [usuario.nickname, usuario.pass, usuario.mail];
-
-    connection.query(consulta, params, (err, resultado) => {
-        if (err) {
-            funcallback(err);
-        } else {
-            funcallback(null, resultado); // Pasar "null" como primer parámetro indica que no hay error.
         }
     });
 };
 
-module.exports = app;
+app.put('/', modificar);
+function modificar(req, res) {
+    let usuario = req.body;
+    Modelusuario.modificar(usuario,(err,resultado) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.send(resultado)
+        }
+    })
+};
 
+app.delete('/:mail', borrar);
+function borrar(req, res) {
+    let usuario = req.params.mail;
+    Modelusuario.borrar(usuario, (err, result) =>{
+        if(err){
+            res.status(500).send(err);
+        }else{
+            res.json(result);
+        }
+    })
+};
+
+
+
+
+module.exports = app;
 
 
