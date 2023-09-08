@@ -4,11 +4,11 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-var Modelusuario = require("Modelo/usuarioM.js");
+var userDB = require("model/user.js");
 
 app.get('/', getAll);
 function getAll(req, res) {
-    Modelusuario.getAll((err, resultado) => {
+    userDB.getAll((err, resultado) => {
         if (err) {
             res.status(500).send(err);
         } else {
@@ -19,7 +19,7 @@ function getAll(req, res) {
 
 app.get('/mail', Cmail) 
 function Cmail(req, res) {
-    Modelusuario.Cmail((err,resultado) => {
+    userDB.Cmail((err,resultado) => {
         if (err) {
             res.status(500).send(err)
         } else {
@@ -31,7 +31,7 @@ function Cmail(req, res) {
 app.post('/', createUser);
 function createUser(req, res) {
     let usuario = req.body;
-    Modelusuario.createUser(usuario, (err, resultado) => {
+    userDB.createUser(usuario, (err, resultado) => {
         if (err) {
             res.status(500).send(err);
         } else {
@@ -43,7 +43,7 @@ function createUser(req, res) {
 app.put('/', modificar);
 function modificar(req, res) {
     let usuario = req.body;
-    Modelusuario.modificar(usuario,(err,resultado) => {
+    userDB.modificar(usuario,(err,resultado) => {
         if (err) {
             res.status(500).send(err);
         } else {
@@ -55,7 +55,7 @@ function modificar(req, res) {
 app.delete('/:mail', borrar);
 function borrar(req, res) {
     let usuario = req.params.mail;
-    Modelusuario.borrar(usuario, (err, result) =>{
+    userDB.borrar(usuario, (err, result) =>{
         if(err){
             res.status(500).send(err);
         }else{
