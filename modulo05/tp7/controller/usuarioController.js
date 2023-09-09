@@ -17,7 +17,7 @@ function getAll(req, res) {
     });
 };
 
-app.get('/mail', Cmail) 
+app.get('/mail', Cmail) //ruta de escucha
 function Cmail(req, res) {
     userDB.Cmail((err,resultado) => {
         if (err) {
@@ -28,7 +28,7 @@ function Cmail(req, res) {
     })
 };
 
-app.post('/', createUser);
+app.post('/', createUser); //ruta de escucha
 function createUser(req, res) {
     let usuario = req.body;
     userDB.createUser(usuario, (err, resultado) => {
@@ -40,7 +40,7 @@ function createUser(req, res) {
     });
 };
 
-app.put('/', modificar);
+app.put('/', modificar); //ruta de escucha
 function modificar(req, res) {
     let usuario = req.body;
     userDB.modificar(usuario,(err,resultado) => {
@@ -52,7 +52,7 @@ function modificar(req, res) {
     })
 };
 
-app.delete('/:mail', borrar);
+app.delete('/:mail', borrar); //ruta de escucha
 function borrar(req, res) {
     let usuario = req.params.mail;
     userDB.borrar(usuario, (err, result) =>{
