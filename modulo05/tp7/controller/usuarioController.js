@@ -4,11 +4,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-var usuarioDb = require("model/usuario.js");
-
-// -------------------------------------------------------- 
-// --rutas de escucha (endpoint) dispoibles para USUARIOS-- 
-// -------------------------------------------------------- 
+var Modelusuario = require("Modelo/usuarioM.js");
 
 app.get('/', getAll);
 app.post('/', createUser);
@@ -24,18 +20,30 @@ app.delete('/:id_usuario', deleteUser);
 //res : respuesta enviada desde el servidor al frontend
 
 function getAll(req, res) {
-    usuarioDb.getAll((err, resultado) => {
+    Modelusuario.getAll((err, resultado) => {
         if (err) {
             res.status(500).send(err);
         } else {
             res.json(resultado);
         }
     });
-}
+};
 
+app.get('/mail', Cmail) 
+function Cmail(req, res) {
+    Modelusuario.Cmail((err,resultado) => {
+        if (err) {
+            res.status(500).send(err)
+        } else {
+            res.json(resultado)
+        }
+    })
+};
+
+app.post('/', createUser);
 function createUser(req, res) {
     let usuario = req.body;
-    usuarioDb.create(usuario, (err, resultado) => {
+    Modelusuario.createUser(usuario, (err, resultado) => {
         if (err) {
             res.status(500).send(err);
         } else {
@@ -45,10 +53,10 @@ function createUser(req, res) {
 }
 
 
-function updateUser(req, res) {
-    let datos_usuario = req.body; //aquellos datos que quiero reemplazar, modificar, etc 
-    let id_usaurio = req.params.id_usuario //para identificarlo dentro de la base de datos
-    usuarioDb.update(datos_usuario, id_usaurio, (err,resultado) => {
+app.put('/', modificar);
+function modificar(req, res) {
+    let usuario = req.body;
+    Modelusuario.modificar(usuario,(err,resultado) => {
         if (err) {
             res.status(500).send(err);
         } else {
@@ -58,9 +66,11 @@ function updateUser(req, res) {
 }
 
 
-function deleteUser(req, res) {
-    usuarioDb.borrar(req.params.id_usuario, (err, result_model) => {
-        if (err) {
+app.delete('/:mail', borrar);
+function borrar(req, res) {
+    let usuario = req.params.mail;
+    Modelusuario.borrar(usuario, (err, result) =>{
+        if(err){
             res.status(500).send(err);
         } else {
             if (result_model.detail.affectedRows == 0) {

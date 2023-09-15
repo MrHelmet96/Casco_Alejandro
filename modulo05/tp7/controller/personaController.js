@@ -6,7 +6,7 @@ app.use(express.urlencoded({ extended: true }));
 
 var modelpersona = require("Modelo/personaM.js");
 
-app.get('/', getAll);
+app.get('/', getAll); //ruta de escucha
 function getAll(req, res) {
     modelpersona.getAll(function (err, resultado) {
         if (err) {
@@ -17,7 +17,7 @@ function getAll(req, res) {
     });
 }
 
-app.get('/persona/:persona', getUserByPersona);
+app.get('/persona/:persona', getUserByPersona); //ruta de escucha
 function getUserByPersona(req, res) {
     modelpersona.getUserByPersona(req.params.persona, (err, result_model) => {
         if (err) {
@@ -28,7 +28,7 @@ function getUserByPersona(req, res) {
     });
 }
 
-app.get('/apellido/:apellido', Bapellido);
+app.get('/apellido/:apellido', Bapellido); //ruta de escucha
 function Bapellido(req, res) {
     modelpersona.Bapellido(req.params.apellido,(err,resultado) => {
         if (err) {
@@ -39,7 +39,7 @@ function Bapellido(req, res) {
     })
 };
 
-app.get('/dni/:dni', getByDNI);
+app.get('/dni/:dni', getByDNI); //ruta de escucha
 function getByDNI(req, res) {
     modelpersona.getByDNI(req.params.dni, (err, result_model) => {
         if (err) {
@@ -50,7 +50,7 @@ function getByDNI(req, res) {
     });
 }
 
-app.post('/', create);
+app.post('/', create); //ruta de escucha
 function create(req, res) {
     let persona = req.body;
     modelpersona.create(persona, (err, resultado) => {
@@ -63,7 +63,7 @@ function create(req, res) {
 
 }
 
-app.put("/", modificar);
+app.put("/", modificar); //ruta de escucha
 function modificar (req, res) {
     let persona = req.body;
     modelpersona.modificar(persona, (err,resultado) => {
@@ -74,8 +74,8 @@ function modificar (req, res) {
         }
     });
 };
-
-app.delete('/:dni', borrar);
+ 
+app.delete('/:dni', borrar); //ruta de escucha
 function borrar(req, res) {
     let id_persona_a_eliminar = req.params.dni;
     modelpersona.borrar(id_persona_a_eliminar, (err, result_model) => {
