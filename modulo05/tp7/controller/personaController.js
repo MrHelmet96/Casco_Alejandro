@@ -1,14 +1,35 @@
+// roothpath : manejo de rutas de otros modulos del proyecto
+// express : modulo que permite gestionar y lanzar servidores
 require('rootpath')();
 const express = require('express');
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-var modelpersona = require("Modelo/personaM.js");
+var persona_db = require("model/persona.js");
 
-app.get('/', getAll); //ruta de escucha
+
+// -------------------------------------------------------- 
+// --rutas de escucha (endpoint) dispoibles para PERSONAS-- 
+// -------------------------------------------------------- 
+app.get('/', getAll);
+app.post('/', crear);
+app.put('/:dni', actualizar);
+app.delete('/:dni', borrar);
+app.get('/:dni', getByDNI);
+app.get('/usuario/:dni', getUserByPersona);
+
+
+
+// -------------------------------------------------------- 
+// ---------FUNCIONES UTILIZADAS EN ENDPOINTS ------------- 
+// --------------------------------------------------------
+
+//req : es lo que llega desde el frontend (en nuestro caso Postman)
+//res : respuesta enviada desde el servidor al frontend
+
 function getAll(req, res) {
-    modelpersona.getAll(function (err, resultado) {
+    persona_db.getAll(function (err, resultado) {
         if (err) {
             res.status(500).send(err);
         } else {
@@ -17,31 +38,54 @@ function getAll(req, res) {
     });
 }
 
-app.get('/persona/:persona', getUserByPersona); //ruta de escucha
-function getUserByPersona(req, res) {
-    modelpersona.getUserByPersona(req.params.persona, (err, result_model) => {
+// -------------------------------------------------------- 
+
+function crear(req, res) {
+    let persona = req.body;
+    persona_db.create(persona, (err, resultado) => {
         if (err) {
             res.status(500).send(err);
         } else {
-            res.send(result_model.mensajito);
+            res.send(resultado);
         }
     });
 }
 
-app.get('/apellido/:apellido', Bapellido); //ruta de escucha
-function Bapellido(req, res) {
-    modelpersona.Bapellido(req.params.apellido,(err,resultado) => {
-        if (err) {
-            res.status(500).send(err)
-        } else {
-            res.json(resultado)
-        }
-    })
-};
+// -------------------------------------------------------- 
 
-app.get('/dni/:dni', getByDNI); //ruta de escucha
-function getByDNI(req, res) {
-    modelpersona.getByDNI(req.params.dni, (err, result_model) => {
+function actualizar(req, res) {
+    let persona = req.body;
+    let id = req.params.dni;
+    persona_db.update(persona, id, (err, resultado) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.send(resultado);
+        }
+    });
+}
+
+// -------------------------------------------------------- 
+
+function borrar(req, res) {
+    let id_persona_a_eliminar = req.params.dni;
+    persona_db.borrar(id_persona_a_eliminar, (err, result_model) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            if (result_model.detail.affectedRows == 0) {
+                res.status(404).send(result_model.message);
+            } else {
+                res.send(result_model.message);
+            }
+        }
+    });
+}
+
+// -------------------------------------------------------- 
+
+function getUserByPersona(req, res) {
+    persona_db.getUserByPersona(req.params.dni, (err, result_model) => {
         if (err) {
             res.status(500).send(err);
         } else {
@@ -50,47 +94,19 @@ function getByDNI(req, res) {
     });
 }
 
-app.post('/', create); //ruta de escucha
-function create(req, res) {
-    let persona = req.body;
-    modelpersona.create(persona, (err, resultado) => {
-        if (err) {
-            res.status(500).send(err);
-        } else {
-            res.send(resultado);
-        }
-    });
+// -------------------------------------------------------- 
 
-}
-
-app.put("/", modificar); //ruta de escucha
-function modificar (req, res) {
-    let persona = req.body;
-    modelpersona.modificar(persona, (err,resultado) => {
+function getByDNI(req, res) {
+    let id = req.params.dni;
+    persona_db.getByDNI(id, (err, result_model) => {
         if (err) {
             res.status(500).send(err);
         } else {
-            res.send(resultado);
-        }
-    });
-};
- 
-app.delete('/:dni', borrar); //ruta de escucha
-function borrar(req, res) {
-    let id_persona_a_eliminar = req.params.dni;
-    modelpersona.borrar(id_persona_a_eliminar, (err, result_model) => {
-        if (err) {
-            res.status(500).send(err);
-        } else {
-            if (result_model.detail.affectedRows == 0) {
-                res.status(404).send(result_model.mensajito);
-            } else {
-                res.send(result_model.mensajito);
-            }
+            res.send(result_model);
         }
     });
 }
 
-
+// -------------------------------------------------------- 
 
 module.exports = app;

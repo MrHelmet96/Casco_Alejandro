@@ -122,6 +122,4 @@ usuario_db.borrar = function (id_usuario, retorno) {
     });
 }
 
-
-
 module.exports = usuario_db;

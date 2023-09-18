@@ -1,3 +1,4 @@
+//configuraciones iniciales
 require('rootpath')();
 
 /*
