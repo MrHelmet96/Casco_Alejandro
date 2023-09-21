@@ -9,9 +9,7 @@ app.use(express.urlencoded({ extended: true }));
 var persona_db = require("model/persona.js");
 
 
-// -------------------------------------------------------- 
-// --rutas de escucha (endpoint) dispoibles para PERSONAS-- 
-// -------------------------------------------------------- 
+// --endpoint dispoibles para PERSONAS-- 
 app.get('/', getAll);
 app.post('/', crear);
 app.put('/:dni', actualizar);
