@@ -17,13 +17,9 @@ app.delete('/:dni', borrar);
 app.get('/:dni', getByDNI);
 app.get('/usuario/:dni', getUserByPersona);
 
+// ---------FUNCIONES ------------- 
 
-
-// -------------------------------------------------------- 
-// ---------FUNCIONES UTILIZADAS EN ENDPOINTS ------------- 
-// --------------------------------------------------------
-
-//req : es lo que llega desde el frontend (en nuestro caso Postman)
+//req : es lo que llega desde el frontend
 //res : respuesta enviada desde el servidor al frontend
 
 function getAll(req, res) {
