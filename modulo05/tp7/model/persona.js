@@ -5,7 +5,7 @@ require('rootpath')();
 se inicializan las constantes para tener acceso a la funcionalidad de mysql asi como el archivo config donde se encuentran los datos de conexion
 */
 
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const configuracion = require("config.json");
 
 //inicializa la conexion entre el servidor y la base de datos
