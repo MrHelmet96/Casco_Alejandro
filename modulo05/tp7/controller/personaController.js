@@ -1,7 +1,5 @@
-// roothpath : manejo de rutas de otros modulos del proyecto
-// express : modulo que permite gestionar y lanzar servidores
-require('rootpath')();
-const express = require('express');
+require('rootpath')(); // manejo de rutas de otros modulos del proyecto
+const express = require('express'); // modulo que permite gestionar y lanzar servidores
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

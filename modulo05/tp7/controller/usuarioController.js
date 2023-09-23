@@ -14,13 +14,7 @@ app.post('/', createUser);
 app.put('/:id_usuario', updateUser);
 app.delete('/:id_usuario', deleteUser);
 
-
-// -------------------------------------------------------- 
-// ---------FUNCIONES UTILIZADAS EN ENDPOINTS ------------- 
-// -------------------------------------------------------- 
-
-//req : datos enviados desde el frontend para que lo utilicemos
-//res : respuesta enviada desde el servidor al frontend
+// ---------FUNCIONES ------------- 
 
 function getAll(req, res) {
     usuarioDb.getAll((err, resultado) => {
@@ -45,7 +39,7 @@ function createUser(req, res) {
 
 
 function updateUser(req, res) {
-    let datos_usuario = req.body; //aquellos datos que quiero reemplazar, modificar, etc 
+    let datos_usuario = req.body; //datos que quiero reemplazar, modificar, etc 
     let id_usaurio = req.params.id_usuario //para identificarlo dentro de la base de datos
     usuarioDb.update(datos_usuario, id_usaurio, (err,resultado) => {
         if (err) {
