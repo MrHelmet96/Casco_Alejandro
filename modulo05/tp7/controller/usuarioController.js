@@ -6,9 +6,8 @@ app.use(express.urlencoded({ extended: true }));
 
 var usuarioDb = require("model/usuario.js");
 
-// -------------------------------------------------------- 
-// --rutas de escucha (endpoint) dispoibles para USUARIOS-- 
-// -------------------------------------------------------- 
+
+// --endpoint dispoibles para USUARIOS-- 
 
 app.get('/', getAll);
 app.post('/', createUser);
