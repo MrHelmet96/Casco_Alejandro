@@ -20,13 +20,6 @@ connection.connect((err) => {
 
 var persona_db = {};
 
-/*
-persona_db : es un objeto que sera invocado desde los endpoint del controlador. Aquí en el MODEL, dicho objeto posee las funcionalidades que permiten la interaccion con la base de datos como update, create, delete, etc. entonces del lado del controlador puedo invocar a persona_db.update(); o persona_db.create();
-
-funCallback: en una funcion que la enviamos desde el endpoint del controlador, es mediante esta funcion que le damos una respuesta desde el MODEL hacia el CONTROLLER, aquí lo que enviamos como error o detalles con mensajes, es lo que recibira personaController para seguir su proceso de respuesta hacia el forontend
-*/
-
-
 // C = CREATE
 // personaController --> app.post('/', create);
 persona_db.create = function (datos, funCallback) {
